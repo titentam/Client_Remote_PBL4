@@ -13,18 +13,66 @@ namespace Client
     public partial class Form1 : Form
     {
         private MyClient client;
+        private String ip;
+        private String pass;
         public Form1()
         {
             InitializeComponent();
-            client = new MyClient("192.168.249.96",5910);
+       
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            client.Connect();
-            Form2 f2 = new Form2(client); 
-            f2.ShowDialog();
+            
 
+        }
+
+        private void uiSymbolLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiSymbolLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+            if (captchaText.Text.Equals(uiVerificationCode1.Code))
+            {
+                ip=iptext.Text;
+                pass=passtext.Text;
+
+                if(client==null) 
+                {
+                    client = new MyClient(ip, 5910);
+                    client.Connect();   
+                }
+                
+
+                if (client.SendPass(pass))
+                {
+                    Form2 f2 = new Form2(client);
+                    f2.ShowDialog();
+                    ConnectBtn.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Sai mật khẩu");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Wrong Captchar. Please try again!!!");
+            }
         }
     }
 }

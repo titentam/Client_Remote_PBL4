@@ -20,6 +20,7 @@ namespace Client
         private BinaryReader reader;
         private BinaryWriter writer;
         private int port;
+        
         private string ipServer;
         private HookKeyBoard hook;
        
@@ -29,16 +30,24 @@ namespace Client
         {
             this.ipServer = ipServer;
             this.port = port;
+           
         }
 
         public void Connect()
-        {
+        {   
             client = new TcpClient();
             client.Connect(ipServer, port);
             stream = client.GetStream();
             reader = new BinaryReader(stream);
             writer = new BinaryWriter(stream);
+
             hook = HookKeyBoard.getInstance(stream, writer);
+            
+        }
+        public bool SendPass(string pass)
+        {
+            writer.Write(pass);
+            return reader.ReadBoolean();
         }
 
         public void ReceiveScreenDesktop(ref PictureBox screen)
