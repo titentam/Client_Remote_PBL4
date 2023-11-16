@@ -13,13 +13,18 @@ namespace Client
     public partial class Form1 : Form
     {
         private MyClient client;
-        private String ip;
-        private String pass;
         public Form1()
         {
             InitializeComponent();
-       
-            
+            InitTemp();
+
+        }
+
+        private void InitTemp()
+        {
+            iptext.Text = "192.168.249.96";
+            //iptext.Text = "127.0.0.1";
+            passtext.Text = "1234";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,19 +50,19 @@ namespace Client
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
-            if (captchaText.Text.Equals(uiVerificationCode1.Code))
+            // captchaText.Text.Equals(uiVerificationCode1.Code)
+            if (true)
             {
-                ip=iptext.Text;
-                pass=passtext.Text;
-
+                MessageBox.Show(passtext.Text);
+                
                 if(client==null) 
                 {
-                    client = new MyClient(ip, 5910);
+                    client = new MyClient(iptext.Text, 5910);
                     client.Connect();   
                 }
                 
 
-                if (client.SendPass(pass))
+                if (client.SendPass(passtext.Text))
                 {
                     Form2 f2 = new Form2(client);
                     f2.ShowDialog();

@@ -103,6 +103,25 @@ namespace Client
             client.UnHook();
         }
 
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(() =>
+            {
+                client.SendVoice();
+            });
+            t.Start();
+            MessageBox.Show("Dang noi");
+        }
+
+        private void uiButton2_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(() =>
+            {
+                client.ReceiveVoice();
+            });
+            t.Start();
+            MessageBox.Show("Dang nghe");
+        }
     }
 
 }

