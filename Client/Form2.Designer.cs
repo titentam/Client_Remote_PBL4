@@ -85,6 +85,7 @@
             this.chatBtn.TabIndex = 5;
             this.chatBtn.Text = "Chat";
             this.chatBtn.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.chatBtn.Click += new System.EventHandler(this.chatBtn_Click);
             // 
             // terminateBtn
             // 

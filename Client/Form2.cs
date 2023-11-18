@@ -123,6 +123,13 @@ namespace Client
             t.Start();
             MessageBox.Show("Dang nghe");
         }
+
+        private void chatBtn_Click(object sender, EventArgs e)
+        {
+            ChatForm chatForm = new ChatForm();
+            chatForm.ConnectToServer();
+            chatForm.Show();
+        }
     }
 
 }
