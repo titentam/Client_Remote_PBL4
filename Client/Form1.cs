@@ -79,5 +79,29 @@ namespace Client
                 MessageBox.Show("Wrong Captchar. Please try again!!!");
             }
         }
+
+        private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = uiComboBox1.SelectedItem.ToString();
+
+            // Check the selected value and set TextBox text accordingly
+            if (selectedValue.Equals("English"))
+            {
+                ipLabel.Text= "Partner's IP";
+                passLabel.Text="Password";
+                ConnectBtn.Text="Start Controlling";
+                uiLabel1.Text="Remote Desktop Controller App";
+
+            }
+            else if (selectedValue.Equals("Tiếng Việt"))
+            {
+                ipLabel.Text= "IP Đối Tác";
+                passLabel.Text="Mật Khẩu";
+                ConnectBtn.Text="Bắt đầu điều khiển";
+                uiLabel1.Text="Ứng Dụng Điều Khiển Máy Tính Từ Xa";
+
+
+            }
+        }
     }
 }

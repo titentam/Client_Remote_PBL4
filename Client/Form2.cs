@@ -103,7 +103,8 @@ namespace Client
             client.UnHook();
         }
 
-        private void uiButton1_Click(object sender, EventArgs e)
+
+        private void micBtn_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(() =>
             {
@@ -113,7 +114,7 @@ namespace Client
             MessageBox.Show("Dang noi");
         }
 
-        private void uiButton2_Click(object sender, EventArgs e)
+        private void loaBtn_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(() =>
             {

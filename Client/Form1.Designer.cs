@@ -32,8 +32,8 @@
             this.passtext = new Sunny.UI.UITextBox();
             this.captchaText = new Sunny.UI.UITextBox();
             this.uiVerificationCode1 = new Sunny.UI.UIVerificationCode();
-            this.uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
-            this.uiSymbolLabel2 = new Sunny.UI.UISymbolLabel();
+            this.ipLabel = new Sunny.UI.UISymbolLabel();
+            this.passLabel = new Sunny.UI.UISymbolLabel();
             this.uiSymbolLabel3 = new Sunny.UI.UISymbolLabel();
             this.uiAvatar1 = new Sunny.UI.UIAvatar();
             this.uiLabel1 = new Sunny.UI.UILabel();
@@ -98,38 +98,38 @@
             this.uiVerificationCode1.Size = new System.Drawing.Size(133, 42);
             this.uiVerificationCode1.TabIndex = 4;
             // 
-            // uiSymbolLabel1
+            // ipLabel
             // 
-            this.uiSymbolLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSymbolLabel1.Location = new System.Drawing.Point(122, 119);
-            this.uiSymbolLabel1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolLabel1.Name = "uiSymbolLabel1";
-            this.uiSymbolLabel1.Size = new System.Drawing.Size(120, 42);
-            this.uiSymbolLabel1.Symbol = 262137;
-            this.uiSymbolLabel1.SymbolSize = 30;
-            this.uiSymbolLabel1.TabIndex = 5;
-            this.uiSymbolLabel1.Text = "IP Đối Tác";
+            this.ipLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.ipLabel.Location = new System.Drawing.Point(86, 119);
+            this.ipLabel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.ipLabel.Name = "ipLabel";
+            this.ipLabel.Size = new System.Drawing.Size(156, 42);
+            this.ipLabel.Symbol = 262137;
+            this.ipLabel.SymbolSize = 30;
+            this.ipLabel.TabIndex = 5;
+            this.ipLabel.Text = "IP Đối Tác";
             // 
-            // uiSymbolLabel2
+            // passLabel
             // 
-            this.uiSymbolLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSymbolLabel2.Location = new System.Drawing.Point(122, 207);
-            this.uiSymbolLabel2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolLabel2.Name = "uiSymbolLabel2";
-            this.uiSymbolLabel2.Size = new System.Drawing.Size(120, 42);
-            this.uiSymbolLabel2.Symbol = 61758;
-            this.uiSymbolLabel2.SymbolSize = 30;
-            this.uiSymbolLabel2.TabIndex = 6;
-            this.uiSymbolLabel2.Text = "Mật Khẩu";
-            this.uiSymbolLabel2.Click += new System.EventHandler(this.uiSymbolLabel2_Click);
+            this.passLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.passLabel.Location = new System.Drawing.Point(86, 207);
+            this.passLabel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.passLabel.Name = "passLabel";
+            this.passLabel.Size = new System.Drawing.Size(156, 42);
+            this.passLabel.Symbol = 61758;
+            this.passLabel.SymbolSize = 30;
+            this.passLabel.TabIndex = 6;
+            this.passLabel.Text = "Mật Khẩu";
+            this.passLabel.Click += new System.EventHandler(this.uiSymbolLabel2_Click);
             // 
             // uiSymbolLabel3
             // 
             this.uiSymbolLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSymbolLabel3.Location = new System.Drawing.Point(122, 298);
+            this.uiSymbolLabel3.Location = new System.Drawing.Point(86, 298);
             this.uiSymbolLabel3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolLabel3.Name = "uiSymbolLabel3";
-            this.uiSymbolLabel3.Size = new System.Drawing.Size(120, 42);
+            this.uiSymbolLabel3.Size = new System.Drawing.Size(156, 42);
             this.uiSymbolLabel3.Symbol = 561302;
             this.uiSymbolLabel3.SymbolSize = 30;
             this.uiSymbolLabel3.TabIndex = 7;
@@ -179,6 +179,7 @@
             this.uiComboBox1.Text = "Language";
             this.uiComboBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiComboBox1.Watermark = "";
+            this.uiComboBox1.SelectedIndexChanged += new System.EventHandler(this.uiComboBox1_SelectedIndexChanged);
             // 
             // ConnectBtn
             // 
@@ -207,8 +208,8 @@
             this.Controls.Add(this.uiAvatar1);
             this.Controls.Add(this.ConnectBtn);
             this.Controls.Add(this.uiSymbolLabel3);
-            this.Controls.Add(this.uiSymbolLabel2);
-            this.Controls.Add(this.uiSymbolLabel1);
+            this.Controls.Add(this.passLabel);
+            this.Controls.Add(this.ipLabel);
             this.Controls.Add(this.uiVerificationCode1);
             this.Controls.Add(this.captchaText);
             this.Controls.Add(this.passtext);
@@ -225,8 +226,8 @@
         private Sunny.UI.UITextBox passtext;
         private Sunny.UI.UITextBox captchaText;
         private Sunny.UI.UIVerificationCode uiVerificationCode1;
-        private Sunny.UI.UISymbolLabel uiSymbolLabel1;
-        private Sunny.UI.UISymbolLabel uiSymbolLabel2;
+        private Sunny.UI.UISymbolLabel ipLabel;
+        private Sunny.UI.UISymbolLabel passLabel;
         private Sunny.UI.UISymbolLabel uiSymbolLabel3;
         private Sunny.UI.UIAvatar uiAvatar1;
         private Sunny.UI.UILabel uiLabel1;
