@@ -150,12 +150,12 @@
             // 
             this.uiLabel1.Font = new System.Drawing.Font("Modern No. 20", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uiLabel1.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.uiLabel1.Location = new System.Drawing.Point(121, 18);
+            this.uiLabel1.Location = new System.Drawing.Point(127, 18);
             this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(489, 74);
+            this.uiLabel1.Size = new System.Drawing.Size(472, 74);
             this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 10;
-            this.uiLabel1.Text = "Remote Desktop Controller App";
+            this.uiLabel1.Text = "Ứng Dụng Điều Khiển Máy Tính Từ Xa";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiComboBox1

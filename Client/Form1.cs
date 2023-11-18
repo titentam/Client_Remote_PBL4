@@ -16,6 +16,7 @@ namespace Client
         public Form1()
         {
             InitializeComponent();
+            uiComboBox1.SelectedIndex=1;
             InitTemp();
 
         }
