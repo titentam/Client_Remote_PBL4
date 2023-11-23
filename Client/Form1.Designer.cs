@@ -72,7 +72,7 @@
             this.passtext.TabIndex = 2;
             this.passtext.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.passtext.Watermark = "";
-            this.passtext.TextChanged += new System.EventHandler(this.uiTextBox1_TextChanged);
+            
             // 
             // captchaText
             // 
@@ -121,7 +121,6 @@
             this.passLabel.SymbolSize = 30;
             this.passLabel.TabIndex = 6;
             this.passLabel.Text = "Mật Khẩu";
-            this.passLabel.Click += new System.EventHandler(this.uiSymbolLabel2_Click);
             // 
             // uiSymbolLabel3
             // 
@@ -134,7 +133,6 @@
             this.uiSymbolLabel3.SymbolSize = 30;
             this.uiSymbolLabel3.TabIndex = 7;
             this.uiSymbolLabel3.Text = "Captcha";
-            this.uiSymbolLabel3.Click += new System.EventHandler(this.uiSymbolLabel3_Click);
             // 
             // uiAvatar1
             // 

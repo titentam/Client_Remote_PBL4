@@ -1,4 +1,5 @@
 ﻿using ControlCustom;
+using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +10,7 @@ using System.Net.Sockets;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,13 +23,11 @@ namespace Client
         private BinaryReader reader;
         private BinaryWriter writer;
         private int port;
-
         private VoiceIn voiceIn;
         private VoiceOut voiceOut;
-
-       
         private string ipServer;
         private HookKeyBoard hook;
+        private bool isListening; // voice chat from server
        
         public bool isConnected { get => client.Connected;}
 
@@ -59,14 +59,35 @@ namespace Client
 
         public void ReceiveVoice()
         {
-            while (true)
+            voiceOut.Play();
+            isListening = true;
+            Thread t = new Thread(() =>
             {
-                voiceOut.ReceiveData();
-            }
+                while (isListening)
+                {
+                    voiceOut.ReceiveData();
+                }
+            });
+            t.Start();
+            
         }
-        public void SendVoice()
+        public void StopReceiveVoice()
         {
-            voiceIn.StartRecording();
+            isListening = false;
+            voiceOut.Stop();
+        }
+
+        public void VoiceRecorder()
+        {
+            Thread t = new Thread(() =>
+            {
+                voiceIn.StartRecording();
+            });
+            t.Start();
+        }
+        public void VoiceStop()
+        {
+            voiceIn.StopRecording();
         }
         public bool SendPass(string pass)
         {
@@ -88,6 +109,22 @@ namespace Client
             }
         }
 
+        public void ReceiveMessage(Action<string> AppendMessage)
+        {
+            while (client.Connected)
+            {
+                string message = reader.ReadString();
+                AppendMessage("Server: " + message);
+            }
+        }
+
+        public void SendMessage(string message)
+        {
+            writer.Write((byte)ControlCustom.ClientMessage.MESSAGE);
+            writer.Write(message);
+            stream.Flush();
+        }
+       
         public void SendMouseMove(double scaleX, double scaleY)
         {
             writer.Write((byte)ControlCustom.ClientMessage.MOUSE_MOVE);

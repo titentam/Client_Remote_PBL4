@@ -14,71 +14,35 @@ namespace Client
 {
     public partial class ChatForm : Form
     {
-        private TcpClient client;
-        private NetworkStream clientStream;
-        private Thread listenerThread;
+        private static ChatForm instance;
 
-        public ChatForm()
+        public delegate void SendMessageDelegate(string message);
+        public SendMessageDelegate SendMessage;
+
+
+        public static ChatForm Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new ChatForm();
+                return instance;
+            }
+        }
+
+        private ChatForm()
         {
             InitializeComponent();
         }
 
-        public void ConnectToServer()
+        public void AppendMessage(string message)
         {
-            client = new TcpClient("127.0.0.1", 6966);
-            clientStream = client.GetStream();
-
-            listenerThread = new Thread(new ThreadStart(ListenForMessages));
-            listenerThread.Start();
+            chatArea.AppendText("Server: "+ message+"\n");
         }
 
-        private void ListenForMessages()
+        private void btnSend_Click(object sender, EventArgs e)
         {
-            while (true)
-            {
-                byte[] message = new byte[4096];
-                int bytesRead;
-
-                try
-                {
-                    bytesRead = clientStream.Read(message, 0, 4096);
-                }
-                catch
-                {
-                    break;
-                }
-
-                if (bytesRead == 0)
-                    break;
-
-                string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
-                DisplayMessage("Server: " + receivedMessage);
-            }
-        }
-
-        private void DisplayMessage(string message)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action<string>(DisplayMessage), message);
-                return;
-            }
-
-            chatArea.AppendText(message + Environment.NewLine);
-        }
-
-        private void SendMessage(string message)
-        {
-            byte[] messageBytes = Encoding.ASCII.GetBytes(message);
-            clientStream.Write(messageBytes, 0, messageBytes.Length);
-            DisplayMessage("You: " + message);
-        }
-
-
-        private void uiSymbolButton1_Click(object sender, EventArgs e)
-        {
-            string message = chatTxt.Text;
-            SendMessage(message);
+            SendMessage(chatTxt.Text);
             chatTxt.Clear();
         }
     }
