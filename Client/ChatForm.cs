@@ -25,7 +25,7 @@ namespace Client
 
         public void ConnectToServer()
         {
-            client = new TcpClient("127.0.0.1", 6966);
+            client = new TcpClient("192.168.233.128", 6966);
             clientStream = client.GetStream();
 
             listenerThread = new Thread(new ThreadStart(ListenForMessages));
@@ -80,6 +80,11 @@ namespace Client
             string message = chatTxt.Text;
             SendMessage(message);
             chatTxt.Clear();
+        }
+
+        private void ChatForm_Load(object sender, EventArgs e)
+        {
+            this.MaximizeBox = false; 
         }
     }
 }

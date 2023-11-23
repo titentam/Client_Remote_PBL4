@@ -104,26 +104,6 @@ namespace Client
         }
 
 
-        private void micBtn_Click(object sender, EventArgs e)
-        {
-            Thread t = new Thread(() =>
-            {
-                client.SendVoice();
-            });
-            t.Start();
-            MessageBox.Show("Dang noi");
-        }
-
-        private void loaBtn_Click(object sender, EventArgs e)
-        {
-            Thread t = new Thread(() =>
-            {
-                client.ReceiveVoice();
-            });
-            t.Start();
-            MessageBox.Show("Dang nghe");
-        }
-
         private void chatBtn_Click(object sender, EventArgs e)
         {
             ChatForm chatForm = new ChatForm();
@@ -134,6 +114,32 @@ namespace Client
         private void terminateBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void uiSwitch1_ValueChanged(object sender, bool value)
+        {
+            if(uiSwitch1.Active)
+            {
+                Thread t = new Thread(() =>
+                {
+                    client.SendVoice();
+                });
+                t.Start();
+                MessageBox.Show("Dang noi");
+            }
+        }
+
+        private void uiSwitch2_ValueChanged(object sender, bool value)
+        {   if(uiSwitch2.Active)
+            {
+                Thread t = new Thread(() =>
+                {
+                    client.ReceiveVoice();
+                });
+                t.Start();
+                MessageBox.Show("Dang nghe");
+            }
+            
         }
     }
 

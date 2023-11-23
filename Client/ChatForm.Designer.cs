@@ -47,7 +47,7 @@
             this.chatArea.Name = "chatArea";
             this.chatArea.Padding = new System.Windows.Forms.Padding(2);
             this.chatArea.ShowText = false;
-            this.chatArea.Size = new System.Drawing.Size(389, 324);
+            this.chatArea.Size = new System.Drawing.Size(389, 389);
             this.chatArea.Style = Sunny.UI.UIStyle.Custom;
             this.chatArea.TabIndex = 0;
             this.chatArea.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -74,7 +74,7 @@
             this.uiPanel1.Controls.Add(this.chatTxt);
             this.uiPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanel1.Location = new System.Drawing.Point(0, 323);
+            this.uiPanel1.Location = new System.Drawing.Point(0, 384);
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
@@ -87,10 +87,10 @@
             // 
             this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiSymbolButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSymbolButton1.Location = new System.Drawing.Point(317, -8);
+            this.uiSymbolButton1.Location = new System.Drawing.Point(301, 3);
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
-            this.uiSymbolButton1.Size = new System.Drawing.Size(60, 50);
+            this.uiSymbolButton1.Size = new System.Drawing.Size(88, 39);
             this.uiSymbolButton1.Symbol = 557699;
             this.uiSymbolButton1.SymbolSize = 35;
             this.uiSymbolButton1.TabIndex = 1;
@@ -107,7 +107,7 @@
             this.chatTxt.Name = "chatTxt";
             this.chatTxt.Padding = new System.Windows.Forms.Padding(5);
             this.chatTxt.ShowText = false;
-            this.chatTxt.Size = new System.Drawing.Size(292, 48);
+            this.chatTxt.Size = new System.Drawing.Size(299, 48);
             this.chatTxt.TabIndex = 0;
             this.chatTxt.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.chatTxt.Watermark = "";
@@ -116,13 +116,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 365);
+            this.ClientSize = new System.Drawing.Size(389, 426);
             this.Controls.Add(this.uiPanel1);
             this.Controls.Add(this.uiRichTextBox2);
             this.Controls.Add(this.chatArea);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ChatForm";
             this.Text = "ChatForm";
+            this.Load += new System.EventHandler(this.ChatForm_Load);
             this.uiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

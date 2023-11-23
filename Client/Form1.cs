@@ -104,5 +104,11 @@ namespace Client
 
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.MaximizeBox = false; // Vô hiệu hóa nút phóng to
+            
+        }
     }
 }
