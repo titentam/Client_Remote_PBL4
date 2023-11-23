@@ -23,7 +23,7 @@ namespace Client
 
         private void InitTemp()
         {
-            iptext.Text = "192.168.249.96";
+            iptext.Text = "192.168.233.128";
             //iptext.Text = "127.0.0.1";
             passtext.Text = "1234";
         }

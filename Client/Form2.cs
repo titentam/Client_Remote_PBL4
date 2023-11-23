@@ -130,6 +130,11 @@ namespace Client
             chatForm.ConnectToServer();
             chatForm.Show();
         }
+
+        private void terminateBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
