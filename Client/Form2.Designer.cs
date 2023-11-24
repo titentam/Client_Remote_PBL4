@@ -104,12 +104,12 @@
             // 
             // swVoice
             // 
-            this.swVoice.ActiveText = "Voice";
+            this.swVoice.ActiveText = "Mic";
             this.swVoice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.swVoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swVoice.InActiveText = "Voice";
+            this.swVoice.InActiveText = "Mic";
             this.swVoice.Location = new System.Drawing.Point(223, 7);
             this.swVoice.MinimumSize = new System.Drawing.Size(1, 1);
             this.swVoice.Name = "swVoice";
