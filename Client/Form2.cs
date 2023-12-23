@@ -116,8 +116,9 @@ namespace Client
 
         private void chatBtn_Click(object sender, EventArgs e)
         {
-            ChatForm.Instance.SendMessage = client.SendMessage;
-            ChatForm.Instance.Show();
+            ChatForm chatForm = new ChatForm();
+            chatForm.ConnectToServer();
+            chatForm.Show();
         }
 
         private void swVoice_ValueChanged(object sender, bool value)
