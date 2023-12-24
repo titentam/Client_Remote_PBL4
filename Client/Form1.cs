@@ -23,36 +23,16 @@ namespace Client
 
         private void InitTemp()
         {
-            iptext.Text = "192.168.249.96";
-            //iptext.Text = "127.0.0.1";
+            iptext.Text = "192.168.233.128";
             passtext.Text = "1234";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-
-        }
-
-        private void uiSymbolLabel2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void uiSymbolLabel3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void uiTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
-            // captchaText.Text.Equals(uiVerificationCode1.Code)
-            if (true)
+            // 
+            if (captchaText.Text.Equals(uiVerificationCode1.Code))
             {
                 MessageBox.Show(passtext.Text);
                 
@@ -100,8 +80,6 @@ namespace Client
                 passLabel.Text="Mật Khẩu";
                 ConnectBtn.Text="Bắt đầu điều khiển";
                 uiLabel1.Text="Ứng Dụng Điều Khiển Máy Tính Từ Xa";
-
-
             }
         }
     }
