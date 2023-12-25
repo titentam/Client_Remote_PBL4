@@ -8,26 +8,37 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Client
 {
     public partial class Form2 : Form
     {
         private MyClient client;
+        private bool isClosed;
         public Form2(MyClient client)
         {
             InitializeComponent();
             this.client = client;
+            this.isClosed = false;
 
             this.KeyPreview = true;
             pictureBox1.MouseWheel += pictureBox1_MouseWheel;
             this.Activated += new EventHandler(Form_Activated);
             this.Deactivate += new EventHandler(Form_Deactivate);
+            this.FormClosed += Form2_FormClosed;
             Thread t = new Thread(() =>
             {
                 Start();
             });
             t.Start();
+        }
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            client.Close();
+            client.UnHook();
+            this.Dispose();
         }
 
         private void Start()
@@ -36,7 +47,24 @@ namespace Client
             {
                 Thread screenThread = new Thread(() =>
                 {
-                    client.ReceiveScreenDesktop(ref pictureBox1);
+                    client.ReceiveScreenDesktop(ref pictureBox1, ref isClosed);
+                    while (!isClosed)
+                    {
+                        Thread.Sleep(100); // Add a small delay to reduce CPU usage
+                    }
+                    try
+                    {
+                        this.Invoke(new Action(() =>
+                        {
+                            client.Close();
+                            this.Dispose();
+                        }));
+                    }
+                    catch (Exception)
+                    {
+                        // do something
+                    }
+                    
                 });
 
                 screenThread.Start();
@@ -116,8 +144,9 @@ namespace Client
 
         private void chatBtn_Click(object sender, EventArgs e)
         {
-            ChatForm.Instance.SendMessage = client.SendMessage;
-            ChatForm.Instance.Show();
+            ChatForm chatForm = new ChatForm();
+            chatForm.ConnectToServer();
+            chatForm.Show();
         }
 
         private void swVoice_ValueChanged(object sender, bool value)

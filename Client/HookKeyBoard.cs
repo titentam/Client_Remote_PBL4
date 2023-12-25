@@ -31,6 +31,11 @@ namespace Client
             {
                 Hook = new HookKeyBoard(stream, writer);
             }
+            else
+            {
+                Hook.stream = stream;
+                Hook.writer = writer;
+            }
             return Hook;
         }
 

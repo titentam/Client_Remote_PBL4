@@ -31,8 +31,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.uiPanel1 = new Sunny.UI.UIPanel();
             this.uiPanel2 = new Sunny.UI.UIPanel();
-            this.swSpeaker = new Sunny.UI.UISwitch();
             this.swVoice = new Sunny.UI.UISwitch();
+            this.swSpeaker = new Sunny.UI.UISwitch();
             this.chatBtn = new Sunny.UI.UISymbolButton();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -47,7 +47,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(801, 365);
+            this.pictureBox1.Size = new System.Drawing.Size(668, 379);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -62,49 +62,36 @@
             this.uiPanel1.Controls.Add(this.chatBtn);
             this.uiPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanel1.Location = new System.Drawing.Point(0, 365);
+            this.uiPanel1.Location = new System.Drawing.Point(0, 379);
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
-            this.uiPanel1.Size = new System.Drawing.Size(801, 48);
+            this.uiPanel1.Size = new System.Drawing.Size(668, 48);
             this.uiPanel1.TabIndex = 1;
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiPanel2
             // 
-            this.uiPanel2.Controls.Add(this.swSpeaker);
             this.uiPanel2.Controls.Add(this.swVoice);
+            this.uiPanel2.Controls.Add(this.swSpeaker);
             this.uiPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiPanel2.Location = new System.Drawing.Point(0, 0);
             this.uiPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel2.Name = "uiPanel2";
-            this.uiPanel2.Size = new System.Drawing.Size(700, 48);
+            this.uiPanel2.Size = new System.Drawing.Size(567, 48);
             this.uiPanel2.TabIndex = 7;
             this.uiPanel2.Text = null;
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // swSpeaker
-            // 
-            this.swSpeaker.ActiveText = "Speaker";
-            this.swSpeaker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swSpeaker.InActiveText = "Speaker";
-            this.swSpeaker.Location = new System.Drawing.Point(403, 7);
-            this.swSpeaker.MinimumSize = new System.Drawing.Size(1, 1);
-            this.swSpeaker.Name = "swSpeaker";
-            this.swSpeaker.Size = new System.Drawing.Size(75, 29);
-            this.swSpeaker.TabIndex = 14;
-            this.swSpeaker.Text = "Bat";
-            this.swSpeaker.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.swSpeaker_ValueChanged);
             // 
             // swVoice
             // 
             this.swVoice.ActiveText = "Mic";
             this.swVoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.swVoice.InActiveText = "Mic";
-            this.swVoice.Location = new System.Drawing.Point(223, 7);
+            this.swVoice.Location = new System.Drawing.Point(174, 7);
             this.swVoice.MinimumSize = new System.Drawing.Size(1, 1);
             this.swVoice.Name = "swVoice";
             this.swVoice.Size = new System.Drawing.Size(75, 29);
@@ -112,12 +99,25 @@
             this.swVoice.Text = "Bat";
             this.swVoice.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.swVoice_ValueChanged);
             // 
+            // swSpeaker
+            // 
+            this.swSpeaker.ActiveText = "Speaker";
+            this.swSpeaker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.swSpeaker.InActiveText = "Speaker";
+            this.swSpeaker.Location = new System.Drawing.Point(267, 7);
+            this.swSpeaker.MinimumSize = new System.Drawing.Size(1, 1);
+            this.swSpeaker.Name = "swSpeaker";
+            this.swSpeaker.Size = new System.Drawing.Size(81, 29);
+            this.swSpeaker.TabIndex = 14;
+            this.swSpeaker.Text = "Bat";
+            this.swSpeaker.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.swSpeaker_ValueChanged);
+            // 
             // chatBtn
             // 
             this.chatBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chatBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.chatBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.chatBtn.Location = new System.Drawing.Point(700, 0);
+            this.chatBtn.Location = new System.Drawing.Point(567, 0);
             this.chatBtn.MinimumSize = new System.Drawing.Size(1, 1);
             this.chatBtn.Name = "chatBtn";
             this.chatBtn.Size = new System.Drawing.Size(101, 48);
@@ -136,14 +136,14 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(801, 365);
+            this.panel1.Size = new System.Drawing.Size(668, 379);
             this.panel1.TabIndex = 2;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 413);
+            this.ClientSize = new System.Drawing.Size(668, 427);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.uiPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);

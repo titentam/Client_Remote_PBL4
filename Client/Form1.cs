@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,33 +27,49 @@ namespace Client
             iptext.Text = "192.168.249.96";
             //iptext.Text = "127.0.0.1";
             passtext.Text = "1234";
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
-            // captchaText.Text.Equals(uiVerificationCode1.Code)
-            if (true)
+            // 
+            if (captchaText.Text.Equals(uiVerificationCode1.Code)||true)
             {
                 MessageBox.Show(passtext.Text);
                 
                 if(client==null) 
                 {
-                    client = new MyClient(iptext.Text, 5910);
-                    client.Connect();   
+                    try
+                    {
+                        client = new MyClient(iptext.Text, 5910);
+                        client.Connect();
+                    }
+                    catch (SocketException)
+                    {
+                        client=null;
+                        MessageBox.Show("Server not exist");
+                    }
+                   
+                }
+
+                if (client != null)
+                {
+                    if (client.SendPass(passtext.Text))
+                    {
+                        Form2 f2 = new Form2(client);
+                        ConnectBtn.Enabled = false;
+                        f2.ShowDialog();
+                        client = null;
+                        ConnectBtn.Enabled = true;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sai mật khẩu");
+                    }
                 }
                 
-
-                if (client.SendPass(passtext.Text))
-                {
-                    Form2 f2 = new Form2(client);
-                    f2.ShowDialog();
-                    ConnectBtn.Enabled = false;
-                }
-                else
-                {
-                    MessageBox.Show("Sai mật khẩu");
-                }
-
             }
             else
             {

@@ -28,6 +28,7 @@ namespace Client
         private string ipServer;
         private HookKeyBoard hook;
         private bool isListening; // voice chat from server
+   
        
         public bool isConnected { get => client.Connected;}
 
@@ -35,7 +36,22 @@ namespace Client
         {
             this.ipServer = ipServer;
             this.port = port;
-            InitVoice();
+            
+        }
+        public void Close()
+        {
+            if(client != null)
+            {
+                client.Close();
+            }
+            if(voiceIn != null)
+            {
+                voiceIn.Close();
+            }
+            if( voiceOut != null )
+            {
+                voiceOut.Close();
+            }
         }
 
         public void Connect()
@@ -45,15 +61,16 @@ namespace Client
             stream = client.GetStream();
             reader = new BinaryReader(stream);
             writer = new BinaryWriter(stream);
+            InitVoice();
 
             hook = HookKeyBoard.getInstance(stream, writer);
         }
 
         private void InitVoice()
         {
-
+         
             voiceIn = new VoiceIn(ipServer, 6969);
-            voiceOut = new VoiceOut(voiceIn.GetWaveFormat(),6969);
+            voiceOut = new VoiceOut(voiceIn.GetWaveFormat(), 6969);
 
         }
 
@@ -91,21 +108,43 @@ namespace Client
         }
         public bool SendPass(string pass)
         {
-            writer.Write(pass);
-            return reader.ReadBoolean();
+            if(isConnected)
+            {
+                try
+                {
+                    writer.Write(pass);
+                    return reader.ReadBoolean();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                
+            }
+            return false;
         }
 
-        public void ReceiveScreenDesktop(ref PictureBox screen)
+        public void ReceiveScreenDesktop(ref PictureBox screen, ref bool isClosed)
         {
             while (client.Connected)
             {
-                int length = reader.ReadInt32();
+                try
+                {
+                    int length = reader.ReadInt32();
 
-                byte[] bitmapByte = reader.ReadBytes(length);
+                    byte[] bitmapByte = reader.ReadBytes(length);
+
+
+                    var bitmap = DataHelper.ByteArrayToBitmap(bitmapByte);
+                    screen.Image = bitmap;
+                }
+                catch (IOException ex) 
+                {
+                    MessageBox.Show("Disconnected!");
+                    isClosed = true;
+                    break;
+                }
                 
-
-                var bitmap = DataHelper.ByteArrayToBitmap(bitmapByte);
-                screen.Image = bitmap;
             }
         }
 
@@ -120,57 +159,109 @@ namespace Client
 
         public void SendMessage(string message)
         {
-            writer.Write((byte)ControlCustom.ClientMessage.MESSAGE);
-            writer.Write(message);
-            stream.Flush();
+            if (isConnected)
+            {
+                writer.Write((byte)ControlCustom.ClientMessage.MESSAGE);
+                writer.Write(message);
+                stream.Flush();
+            }
+            
         }
        
         public void SendMouseMove(double scaleX, double scaleY)
         {
-            writer.Write((byte)ControlCustom.ClientMessage.MOUSE_MOVE);
-            writer.Write(scaleX);
-            writer.Write(scaleY);
-            stream.Flush();
+            if (isConnected)
+            {
+                try
+                {
+                    writer.Write((byte)ControlCustom.ClientMessage.MOUSE_MOVE);
+                    writer.Write(scaleX);
+                    writer.Write(scaleY);
+                    stream.Flush();
+                }
+                catch(Exception ex)
+                {
+                    return;
+                }
+                
+            }
+           
         }
         public void SendMouseScroll(int scrollValue)
         {
-            writer.Write((byte)ControlCustom.ClientMessage.MOUSE_SCROLL);
-            writer.Write(scrollValue);
-            stream.Flush();
+            if (isConnected)
+            {
+                try
+                {
+                    writer.Write((byte)ControlCustom.ClientMessage.MOUSE_SCROLL);
+                    writer.Write(scrollValue);
+                    stream.Flush();
+                }
+                catch (Exception ex)
+                {
+                    return;
+                }
+                
+            }
+            
         }
         public void SendMouseDown(double scaleX, double scaleY, MouseButtons btn = MouseButtons.Left)
         {
-            byte type;
-            if (btn == MouseButtons.Left)
+            if (isConnected)
             {
-                type = (byte)ControlCustom.ClientMessage.MOUSE_LEFT_DOWN;
-            }
-            else
-            {
-                type = (byte)ControlCustom.ClientMessage.MOUSE_RIGHT_DOWN;
-            }
+                try
+                {
+                    byte type;
+                    if (btn == MouseButtons.Left)
+                    {
+                        type = (byte)ControlCustom.ClientMessage.MOUSE_LEFT_DOWN;
+                    }
+                    else
+                    {
+                        type = (byte)ControlCustom.ClientMessage.MOUSE_RIGHT_DOWN;
+                    }
 
-            writer.Write(type);
-            writer.Write(scaleX);
-            writer.Write(scaleY);
-            stream.Flush();
+                    writer.Write(type);
+                    writer.Write(scaleX);
+                    writer.Write(scaleY);
+                    stream.Flush();
+                }
+                catch( Exception ex)
+                {
+                    return;
+                }
+                
+            }
+            
         }
         public void SendMouseUp(double scaleX, double scaleY, MouseButtons btn = MouseButtons.Left)
         {
+            if(isConnected)
+            {
+                try
+                {
+                    byte type;
+                    if (btn == MouseButtons.Left)
+                    {
+                        type = (byte)ControlCustom.ClientMessage.MOUSE_LEFT_UP;
+                    }
+                    else
+                    {
+                        type = (byte)ControlCustom.ClientMessage.MOUSE_RIGHT_UP;
+                    }
+                    writer.Write(type);
+                    writer.Write(scaleX);
+                    writer.Write(scaleY);
+                    stream.Flush();
+                }
+                catch (Exception)
+                {
 
-            byte type;
-            if (btn == MouseButtons.Left)
-            {
-                type = (byte)ControlCustom.ClientMessage.MOUSE_LEFT_UP;
+                    return;
+                }
+                
             }
-            else
-            {
-                type = (byte)ControlCustom.ClientMessage.MOUSE_RIGHT_UP;
-            }
-            writer.Write(type);
-            writer.Write(scaleX);
-            writer.Write(scaleY);
-            stream.Flush();
+            
         }
         
         public void SetHook()
