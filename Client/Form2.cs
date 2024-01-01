@@ -96,10 +96,10 @@ namespace Client
                 catch (Exception ex)
                 {
                     isChatConnected=false;
-                    //if (chatClient.Connected)
-                    //{
-                    //    chatClient.Close();
-                    //}
+                    if (chatClient.Connected)
+                    {
+                        chatClient.Close();
+                    }
                     break;
                 }
             }
