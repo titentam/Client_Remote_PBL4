@@ -24,7 +24,7 @@ namespace Client
 
         private void InitTemp()
         {
-            iptext.Text = "192.168.249.96";
+            iptext.Text = "192.168.233.128";
             //iptext.Text = "127.0.0.1";
             passtext.Text = "1234";
             this.MaximizeBox = false;
@@ -33,7 +33,7 @@ namespace Client
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
-            // 
+            this.WindowState = FormWindowState.Minimized;
             if (captchaText.Text.Equals(uiVerificationCode1.Code)||true)
             {
                 MessageBox.Show(passtext.Text);

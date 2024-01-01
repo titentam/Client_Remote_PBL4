@@ -14,49 +14,51 @@ namespace Client
 {
     public partial class ChatForm : Form
     {
-        private TcpClient client;
+       //private TcpClient client;
         private NetworkStream clientStream;
-        private Thread listenerThread;
+        //private Thread listenerThread;
+        //private string ipServer;
 
-        public ChatForm()
-        {
+        public ChatForm(NetworkStream chatClientStream)
+        {   this.clientStream = chatClientStream;
             InitializeComponent();
+            chatArea.ReadOnly = true;
         }
 
-        public void ConnectToServer()
-        {
-            client = new TcpClient("192.168.233.128", 6966);
-            clientStream = client.GetStream();
+        //public void ConnectToServer()
+        //{
+        //    client = new TcpClient(ipServer, 6966);
+        //    clientStream = client.GetStream();
 
-            listenerThread = new Thread(new ThreadStart(ListenForMessages));
-            listenerThread.Start();
-        }
+        //    listenerThread = new Thread(new ThreadStart(ListenForMessages));
+        //    listenerThread.Start();
+        //}
 
-        private void ListenForMessages()
-        {
-            while (true)
-            {
-                byte[] message = new byte[4096];
-                int bytesRead;
+        //private void ListenForMessages()
+        //{
+        //    while (true)
+        //    {
+        //        byte[] message = new byte[4096];
+        //        int bytesRead;
 
-                try
-                {
-                    bytesRead = clientStream.Read(message, 0, 4096);
-                }
-                catch
-                {
-                    break;
-                }
+        //        try
+        //        {
+        //            bytesRead = clientStream.Read(message, 0, 4096);
+        //        }
+        //        catch
+        //        {
+        //            break;
+        //        }
 
-                if (bytesRead == 0)
-                    break;
+        //        if (bytesRead == 0)
+        //            break;
 
-                string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
-                DisplayMessage("Server: " + receivedMessage);
-            }
-        }
+        //        string receivedMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
+        //        DisplayMessage("Server: " + receivedMessage);
+        //    }
+        //}
 
-        private void DisplayMessage(string message)
+        public void DisplayMessage(string message)
         {
             if (InvokeRequired)
             {
@@ -73,14 +75,6 @@ namespace Client
             clientStream.Write(messageBytes, 0, messageBytes.Length);
             DisplayMessage("You: " + message);
         }
-
-
-        //private void uiSymbolButton1_Click(object sender, EventArgs e)
-        //{
-        //    string message = chatTxt.Text;
-        //    SendMessage(message);
-        //    chatTxt.Clear();
-        //}
 
         private void ChatForm_Load(object sender, EventArgs e)
         {

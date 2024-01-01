@@ -25,7 +25,7 @@ namespace Client
         private int port;
         private VoiceIn voiceIn;
         private VoiceOut voiceOut;
-        private string ipServer;
+        public string ipServer;
         private HookKeyBoard hook;
         private bool isListening; // voice chat from server
    
