@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,8 +29,10 @@ namespace Client
         private string ipServer;
         private HookKeyBoard hook;
         private bool isListening; // voice chat from server
-   
-       
+        public ChatForm chatForm;
+
+
+        public Action ShowChatForm;
         public bool isConnected { get => client.Connected;}
 
         public MyClient(string ipServer, int port)
@@ -37,6 +40,20 @@ namespace Client
             this.ipServer = ipServer;
             this.port = port;
             
+            
+        }
+
+        public void InitChat()
+        {
+            chatForm = new ChatForm();
+            chatForm.SendMessage += SendMessage;
+
+            chatForm.Show();
+            //chatForm.Visible = false;
+        }
+        public string GetIp()
+        {
+            return this.ipServer;
         }
         public void Close()
         {
@@ -52,6 +69,10 @@ namespace Client
             {
                 voiceOut.Close();
             }
+            if(chatForm != null)
+            {
+                chatForm.Dispose();
+            }
         }
 
         public void Connect()
@@ -61,8 +82,10 @@ namespace Client
             stream = client.GetStream();
             reader = new BinaryReader(stream);
             writer = new BinaryWriter(stream);
-            InitVoice();
+            //InitVoice();
 
+
+            //InitChat();
             hook = HookKeyBoard.getInstance(stream, writer);
         }
 
@@ -130,13 +153,29 @@ namespace Client
             {
                 try
                 {
-                    int length = reader.ReadInt32();
+                    byte type = reader.ReadByte();
+                    if(type == 0) // screen
+                    {
+                        int length = reader.ReadInt32();
 
-                    byte[] bitmapByte = reader.ReadBytes(length);
+                        byte[] bitmapByte = reader.ReadBytes(length);
 
 
-                    var bitmap = DataHelper.ByteArrayToBitmap(bitmapByte);
-                    screen.Image = bitmap;
+                        var bitmap = DataHelper.ByteArrayToBitmap(bitmapByte);
+                        screen.Image = bitmap;
+                    }
+                    if(type == 1) // chat
+                    {
+                        
+                        if (chatForm == null || chatForm.IsDisposed)
+                        {
+                            ShowChatForm.Invoke();
+                        }
+
+                        string message = reader.ReadString();
+                        chatForm.DisplayMessage("Server: " + message);
+                    }
+                    
                 }
                 catch (IOException ex) 
                 {
@@ -148,14 +187,6 @@ namespace Client
             }
         }
 
-        public void ReceiveMessage(Action<string> AppendMessage)
-        {
-            while (client.Connected)
-            {
-                string message = reader.ReadString();
-                AppendMessage("Server: " + message);
-            }
-        }
 
         public void SendMessage(string message)
         {

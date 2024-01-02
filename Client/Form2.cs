@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace Client
     {
         private MyClient client;
         private bool isClosed;
+        
         public Form2(MyClient client)
         {
             InitializeComponent();
@@ -32,14 +35,16 @@ namespace Client
                 Start();
             });
             t.Start();
+            
         }
 
+       
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
             client.Close();
             client.UnHook();
             this.Dispose();
-        }
+        }   
 
         private void Start()
         {
@@ -47,6 +52,7 @@ namespace Client
             {
                 Thread screenThread = new Thread(() =>
                 {
+                    client.ShowChatForm += ShowChatForm;
                     client.ReceiveScreenDesktop(ref pictureBox1, ref isClosed);
                     while (!isClosed)
                     {
@@ -70,7 +76,8 @@ namespace Client
                 screenThread.Start();
             }
         }
-
+        
+       
         private double[] GetScaleCursor(int x, int y)
         {
             int width = pictureBox1.Width;
@@ -144,10 +151,22 @@ namespace Client
 
         private void chatBtn_Click(object sender, EventArgs e)
         {
-            ChatForm chatForm = new ChatForm();
-            chatForm.ConnectToServer();
-            chatForm.Show();
+            
+            client.InitChat();
+            client.chatForm.Show();
+            
         }
+
+        public void ShowChatForm()
+        {
+            this.Invoke(new Action(() =>
+            {
+                client.InitChat();
+                client.chatForm.Show();
+            }));
+            
+        }
+
 
         private void swVoice_ValueChanged(object sender, bool value)
         {
@@ -172,6 +191,7 @@ namespace Client
                 client.StopReceiveVoice();
             }
         }
+
     }
 
 }

@@ -36,7 +36,7 @@ namespace Client
             // 
             if (captchaText.Text.Equals(uiVerificationCode1.Code)||true)
             {
-                MessageBox.Show(passtext.Text);
+                //MessageBox.Show(passtext.Text);
                 
                 if(client==null) 
                 {

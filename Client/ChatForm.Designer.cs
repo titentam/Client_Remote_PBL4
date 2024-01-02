@@ -42,12 +42,12 @@
             this.chatArea.FillColor = System.Drawing.Color.White;
             this.chatArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.chatArea.Location = new System.Drawing.Point(0, 0);
-            this.chatArea.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chatArea.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chatArea.MinimumSize = new System.Drawing.Size(1, 1);
             this.chatArea.Name = "chatArea";
-            this.chatArea.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chatArea.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chatArea.ShowText = false;
-            this.chatArea.Size = new System.Drawing.Size(519, 399);
+            this.chatArea.Size = new System.Drawing.Size(389, 324);
             this.chatArea.Style = Sunny.UI.UIStyle.Custom;
             this.chatArea.TabIndex = 0;
             this.chatArea.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -56,13 +56,13 @@
             // 
             this.uiRichTextBox2.FillColor = System.Drawing.Color.White;
             this.uiRichTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiRichTextBox2.Location = new System.Drawing.Point(171, 5);
-            this.uiRichTextBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiRichTextBox2.Location = new System.Drawing.Point(128, 4);
+            this.uiRichTextBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.uiRichTextBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiRichTextBox2.Name = "uiRichTextBox2";
-            this.uiRichTextBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.uiRichTextBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uiRichTextBox2.ShowText = false;
-            this.uiRichTextBox2.Size = new System.Drawing.Size(8, 7);
+            this.uiRichTextBox2.Size = new System.Drawing.Size(6, 6);
             this.uiRichTextBox2.Style = Sunny.UI.UIStyle.Custom;
             this.uiRichTextBox2.TabIndex = 1;
             this.uiRichTextBox2.Text = "uiRichTextBox2";
@@ -74,11 +74,11 @@
             this.uiPanel1.Controls.Add(this.chatTxt);
             this.uiPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanel1.Location = new System.Drawing.Point(0, 397);
-            this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiPanel1.Location = new System.Drawing.Point(0, 323);
+            this.uiPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
-            this.uiPanel1.Size = new System.Drawing.Size(519, 52);
+            this.uiPanel1.Size = new System.Drawing.Size(389, 42);
             this.uiPanel1.TabIndex = 2;
             this.uiPanel1.Text = "uiPanel1";
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -114,15 +114,16 @@
             // 
             // ChatForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 449);
+            this.ClientSize = new System.Drawing.Size(389, 365);
             this.Controls.Add(this.uiPanel1);
             this.Controls.Add(this.uiRichTextBox2);
             this.Controls.Add(this.chatArea);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ChatForm";
             this.Text = "ChatForm";
+            
             this.uiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

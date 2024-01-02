@@ -117,17 +117,35 @@ namespace Client
 
         private static void SendKeyDown(Keys key)
         {
-            byte type = (byte)ControlCustom.ClientMessage.KEY_DOWN;
-            Hook.writer.Write(type);
-            Hook.writer.Write((int)key);
-            Hook.stream.Flush();
+            try
+            {
+                byte type = (byte)ControlCustom.ClientMessage.KEY_DOWN;
+                Hook.writer.Write(type);
+                Hook.writer.Write((int)key);
+                Hook.stream.Flush();
+            }
+            catch (Exception)
+            {
+
+                // do something
+            }
+            
         }
         private static void SendKeyUp(Keys key)
         {
-            byte type = (byte)ControlCustom.ClientMessage.KEY_UP;
-            Hook.writer.Write(type);
-            Hook.writer.Write((int)key);
-            Hook.stream.Flush();
+            try
+            {
+                byte type = (byte)ControlCustom.ClientMessage.KEY_UP;
+                Hook.writer.Write(type);
+                Hook.writer.Write((int)key);
+                Hook.stream.Flush();
+            }
+            catch (Exception)
+            {
+
+                // do something
+            }
+            
 
         }
     }
